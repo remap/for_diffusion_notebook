@@ -17,10 +17,20 @@ from torchvision.transforms import (
     ToTensor,
 )
 
-from .network.decoder import MultiresConvDecoder
-from .network.encoder import DepthProEncoder
-from .network.fov import FOVNetwork
-from .network.vit_factory import VIT_CONFIG_DICT, ViTPreset, create_vit
+import sys
+from pathlib import Path
+path1 = Path('/content/for_diffusion_notebook/ml-depth-pro/')
+path1 = Path('/content/for_diffusion_notebook/ml-depth-pro/src/')
+path2 = Path('/content/for_diffusion_notebook/ml-depth-pro/src/depth_pro/')
+path3 = Path('/content/for_diffusion_notebook/ml-depth-pro/src/network/')
+sys.path.insert(0, str(path1))
+sys.path.insert(0, str(path2))
+sys.path.insert(0, str(path3))
+
+from network.decoder import MultiresConvDecoder
+from network.encoder import DepthProEncoder
+from network.fov import FOVNetwork
+from network.vit_factory import VIT_CONFIG_DICT, ViTPreset, create_vit
 
 
 @dataclass
@@ -39,7 +49,8 @@ class DepthProConfig:
 DEFAULT_MONODEPTH_CONFIG_DICT = DepthProConfig(
     patch_encoder_preset="dinov2l16_384",
     image_encoder_preset="dinov2l16_384",
-    checkpoint_uri="./checkpoints/depth_pro.pt",
+    # checkpoint_uri="./checkpoints/depth_pro.pt",
+    checkpoint_uri="/content/for_diffusion_notebook/ml-depth-pro/checkpoints/depth_pro.pt",
     decoder_features=256,
     use_fov_head=True,
     fov_encoder_preset="dinov2l16_384",
